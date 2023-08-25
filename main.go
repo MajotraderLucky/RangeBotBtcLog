@@ -27,5 +27,7 @@ func main() {
 	logger.SetLogger()
 	logger.LogLine()
 
+	log.Println("Btc bot started...")
+
 	Init()
 }
