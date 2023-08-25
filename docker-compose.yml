@@ -1,0 +1,17 @@
+version: '3'
+services:
+  rangebot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+    - ./logs:/app/logs
+    environment:
+      - TZ=Europe/Moscow
+    networks:
+      - botnetwork
+
+networks:
+  botnetwork:
