@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/MajotraderLucky/Utils/logger"
 	"github.com/joho/godotenv"
 )
 
@@ -14,5 +15,17 @@ func Init() {
 }
 
 func main() {
+	logger := logger.Logger{}
+	err := logger.CreateLogsDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = logger.OpenLogFile()
+	if err != nil {
+		log.Fatal(err)
+	}
+	logger.SetLogger()
+	logger.LogLine()
+
 	Init()
 }
