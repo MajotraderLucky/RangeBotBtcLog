@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/MajotraderLucky/MarketRepository/initlog"
+	"github.com/MajotraderLucky/MarketRepository/positionlog"
 	"github.com/MajotraderLucky/Utils/logger"
 )
 
@@ -23,4 +24,6 @@ func main() {
 	log.Println("Btc bot started...")
 
 	initlog.Init()
+
+	positionlog.Hello()
 }
