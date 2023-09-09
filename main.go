@@ -9,9 +9,6 @@ import (
 	"github.com/MajotraderLucky/MarketRepository/initlog"
 	"github.com/MajotraderLucky/MarketRepository/positionlog"
 	"github.com/MajotraderLucky/Utils/logger"
-
-	"github.com/adshao/go-binance/v2"
-	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -33,22 +30,7 @@ func main() {
 
 	positionlog.Hello()
 
-	if err := godotenv.Load(); err != nil {
-		log.Println("No.env file found.")
-	}
-	log.Println(".env file loaded.")
-
-	apiKey, exists := os.LookupEnv("BINANCE_API_KEY")
-	if !exists {
-		log.Fatal("BINANCE_API_KEY not set")
-	}
-
-	secretKey, exexists := os.LookupEnv("BINANCE_SECRET_KEY")
-	if !exexists {
-		log.Fatal("BINANCE_SECRET_KEY not set")
-	}
-
-	futuresClient := binance.NewFuturesClient(apiKey, secretKey)
+	futuresClient := initlog.NewFuturesClient()
 
 	accServ, err := futuresClient.NewGetAccountService().Do(context.Background())
 	if err != nil {
