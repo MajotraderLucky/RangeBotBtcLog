@@ -64,4 +64,6 @@ func main() {
 
 	logger.LogLine()
 	log.Println("Check files exist:", initlog.CheckFilesExist())
+	logger.LogLine()
+	logger.CleanLog()
 }
