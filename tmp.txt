@@ -1,14 +1,20 @@
-package main_test
+package main
 
 import (
- "testing"
- "github.com/stretchr/testify/assert"
+    "os"
+    "testing"
 )
 
-func TestCheckFilesExist(t *testing.T) {
- // Выполняем функцию CheckFilesExist()
- result := CheckFilesExist()
+func TestCreateLogsDir(t *testing.T) {
+    logger := &Logger{}
+    err := logger.CreateLogsDir()
+    if err != nil {
+        t.Errorf("Expected no error, but got: %v", err)
+    }
 
- // Проверяем, что функция вернула true
- assert.True(t, result)
+    // Check that the "logs" directory was created
+    _, err = os.Stat("logs")
+    if os.IsNotExist(err) {
+        t.Error("Expected 'logs' directory to be created, but it doesn't exist")
+    }
 }
