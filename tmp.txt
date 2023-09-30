@@ -1,0 +1,14 @@
+package main_test
+
+import (
+ "testing"
+ "github.com/stretchr/testify/assert"
+)
+
+func TestCheckFilesExist(t *testing.T) {
+ // Выполняем функцию CheckFilesExist()
+ result := CheckFilesExist()
+
+ // Проверяем, что функция вернула true
+ assert.True(t, result)
+}
