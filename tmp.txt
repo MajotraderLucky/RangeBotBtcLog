@@ -5,16 +5,16 @@ import (
     "testing"
 )
 
-func TestCreateLogsDir(t *testing.T) {
+func TestOpenLogFile(t *testing.T) {
     logger := &Logger{}
-    err := logger.CreateLogsDir()
+    err := logger.OpenLogFile()
     if err != nil {
         t.Errorf("Expected no error, but got: %v", err)
     }
 
-    // Check that the "logs" directory was created
-    _, err = os.Stat("logs")
+    // Check that the log file was created
+    _, err = os.Stat("logs/log.txt")
     if os.IsNotExist(err) {
-        t.Error("Expected 'logs' directory to be created, but it doesn't exist")
+        t.Error("Expected 'logs/log.txt' file to be created, but it doesn't exist")
     }
 }

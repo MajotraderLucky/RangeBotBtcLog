@@ -30,3 +30,17 @@ func TestCreateLogsDir(t *testing.T) {
 		t.Error("Expected 'logs' directory to be created, but it doesn't exist")
 	}
 }
+
+func TestOpenLogFile(t *testing.T) {
+	logger := logger.Logger{}
+	err := logger.OpenLogFile()
+	if err != nil {
+		t.Errorf("Expected no error, but got: %v", err)
+	}
+
+	// Check that the log file was created
+	_, err = os.Stat("logs/log.txt")
+	if os.IsNotExist(err) {
+		t.Error("Expected 'logs/log.txt' file to be created, but it doesn't exist")
+	}
+}
