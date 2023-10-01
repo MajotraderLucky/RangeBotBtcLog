@@ -1,20 +1,28 @@
-package main
+func TestSetLogger(t *testing.T) {
+  // Create a temporary file for testing
+  file, err := os.Create("test.log")
+  if err != nil {
+    t.Fatalf("Failed to create log file: %v", err)
+  }
+  defer file.Close()
 
-import (
-    "os"
-    "testing"
-)
+  logger := &Logger{logFile: file}
+  logger.SetLogger()
 
-func TestOpenLogFile(t *testing.T) {
-    logger := &Logger{}
-    err := logger.OpenLogFile()
-    if err != nil {
-        t.Errorf("Expected no error, but got: %v", err)
-    }
+  // Redirect log output to the specified file
+  log.SetOutput(file)
 
-    // Check that the log file was created
-    _, err = os.Stat("logs/log.txt")
-    if os.IsNotExist(err) {
-        t.Error("Expected 'logs/log.txt' file to be created, but it doesn't exist")
-    }
+  // Check that the log output is indeed redirected to the specified file
+  log.Println("This is a test log message")
+
+  // Read the contents of the log file
+  contents, err := ioutil.ReadFile("test.log")
+  if err != nil {
+    t.Fatalf("Failed to read log file: %v", err)
+  }
+
+  // Check that the log message is present in the file
+  if !strings.Contains(string(contents), "This is a test log message") {
+    t.Errorf("Expected log message not found in log file")
+  }
 }

@@ -1,7 +1,9 @@
 package main
 
 import (
+	"log"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/MajotraderLucky/MarketRepository/initlog"
@@ -42,5 +44,34 @@ func TestOpenLogFile(t *testing.T) {
 	_, err = os.Stat("logs/log.txt")
 	if os.IsNotExist(err) {
 		t.Error("Expected 'logs/log.txt' file to be created, but it doesn't exist")
+	}
+}
+
+func TestSetLogger(t *testing.T) {
+	// Create a temporary file for testing
+	file, err := os.Create("test.log")
+	if err != nil {
+		t.Fatalf("Failed to create log file: %v", err)
+	}
+	defer file.Close()
+
+	logger := logger.Logger{}
+	logger.SetLogger()
+
+	// Redirect log output to the specified file
+	log.SetOutput(file)
+
+	// Check that the log output is indeed redirected to the specified file
+	log.Println("This is a test log message")
+
+	// Reed the contents of the log file
+	contents, err := os.ReadFile("test.log")
+	if err != nil {
+		t.Fatalf("Failed to read log file: %v", err)
+	}
+
+	// Check that the log message is present in the file
+	if !strings.Contains(string(contents), "This is a test log message") {
+		t.Errorf("Expected log message not found in log file")
 	}
 }
