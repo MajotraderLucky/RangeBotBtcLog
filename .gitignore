@@ -1,3 +1,5 @@
 .env
 .vscode
 test.log
+fileJson.json
+logs/log.txt
