@@ -79,7 +79,6 @@ func TestSetLogger(t *testing.T) {
 }
 
 // --------TestGetDebthData_SuccessfulRequest--------------------------
-
 type MockFuturesClient struct {
 	mock.Mock
 }
@@ -104,35 +103,35 @@ type MarketDataService struct {
 }
 
 func NewMarketDataService() *MarketDataService {
-	// Инициализация MarketDataService и возврат указателя на него
+	// Initialize MarketDataService and return a pointer to it
 	return &MarketDataService{}
 }
 
 func TestGetDebthData_SuccessfulRequest(t *testing.T) {
-	// Создаем mock-клиент для binance.NewFuturesClient()
+	// Create a mock client for binance.NewFuturesClient()
 	mockClient := &MockFuturesClient{}
 
-	// Устанавливаем ожидаемое значение для вызова futuresClient.NewDepthService().Symbol("BTCUSDT").Do()
+	// Set the expected value for the call to futuresClient.NewDepthService().Symbol("BTCUSDT").Do()
 	expectedData := &binance.DepthResponse{
-		// Здесь указываем ожидаемые значения данных о глубине рынка
+		// Specify the expected values for market depth data here
 	}
 	mockClient.On("NewDepthService").Return(mockClient)
 	mockClient.On("Symbol", "BTCUSDT").Return(mockClient)
 	mockClient.On("Do").Return(expectedData, nil)
 
-	// Создаем экземпляр тестируемой функции
+	// Create an instance of the tested function
 	service := NewMarketDataService()
 
-	// Вызываем функцию GetDebthData()
+	// Call the GetDebthData() function
 	err := service.GetDebthData()
 
-	// Проверяем, что полученные данные о глубине рынка были успешно распарсены и записаны в лог
+	// Check that the retrieved market depth data was successfully parsed and logged
 	assert.NoError(t, err)
-	// Здесь можно добавить дополнительные проверки, например, сравнение распарсенных данных с ожидаемыми значениями
+	// Additional checks can be added here, such as comparing the parsed data with expected values
 }
 
 func (m *MarketDataService) GetDebthData() error {
-	// Реализация функциональности для получения данных о глубине рынка
+	// Implementation of the functionality to retrieve market depth data
 	return nil
 }
 
