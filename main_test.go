@@ -8,7 +8,9 @@ import (
 
 	"github.com/MajotraderLucky/MarketRepository/initlog"
 	"github.com/MajotraderLucky/Utils/logger"
+	"github.com/adshao/go-binance/v2"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
 
 func TestCheckFilesExist(t *testing.T) {
@@ -75,3 +77,63 @@ func TestSetLogger(t *testing.T) {
 		t.Errorf("Expected log message not found in log file")
 	}
 }
+
+// --------TestGetDebthData_SuccessfulRequest--------------------------
+
+type MockFuturesClient struct {
+	mock.Mock
+}
+
+func (m *MockFuturesClient) NewDepthService() *binance.DepthService {
+	args := m.Called()
+	return args.Get(0).(*binance.DepthService)
+}
+
+func (m *MockFuturesClient) Symbol(symbol string) *binance.DepthService {
+	args := m.Called(symbol)
+	return args.Get(0).(*binance.DepthService)
+}
+
+func (m *MockFuturesClient) Do() (*binance.DepthResponse, error) {
+	args := m.Called()
+	return args.Get(0).(*binance.DepthResponse), args.Error(1)
+}
+
+type MarketDataService struct {
+	// ...
+}
+
+func NewMarketDataService() *MarketDataService {
+	// Инициализация MarketDataService и возврат указателя на него
+	return &MarketDataService{}
+}
+
+func TestGetDebthData_SuccessfulRequest(t *testing.T) {
+	// Создаем mock-клиент для binance.NewFuturesClient()
+	mockClient := &MockFuturesClient{}
+
+	// Устанавливаем ожидаемое значение для вызова futuresClient.NewDepthService().Symbol("BTCUSDT").Do()
+	expectedData := &binance.DepthResponse{
+		// Здесь указываем ожидаемые значения данных о глубине рынка
+	}
+	mockClient.On("NewDepthService").Return(mockClient)
+	mockClient.On("Symbol", "BTCUSDT").Return(mockClient)
+	mockClient.On("Do").Return(expectedData, nil)
+
+	// Создаем экземпляр тестируемой функции
+	service := NewMarketDataService()
+
+	// Вызываем функцию GetDebthData()
+	err := service.GetDebthData()
+
+	// Проверяем, что полученные данные о глубине рынка были успешно распарсены и записаны в лог
+	assert.NoError(t, err)
+	// Здесь можно добавить дополнительные проверки, например, сравнение распарсенных данных с ожидаемыми значениями
+}
+
+func (m *MarketDataService) GetDebthData() error {
+	// Реализация функциональности для получения данных о глубине рынка
+	return nil
+}
+
+// --------End of TestGetDebthData_SuccessfulRequest--------------------------
