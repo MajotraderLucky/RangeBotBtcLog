@@ -43,6 +43,7 @@ func main() {
 	logger.LogLine()
 
 	klinesdata.GetDebthData()
+	klinesdata.KlinesInfo()
 
 	logger.CleanLog()
 }
