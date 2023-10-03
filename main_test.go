@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/MajotraderLucky/MarketRepository/initlog"
+	"github.com/MajotraderLucky/MarketRepository/klinesdata"
 	"github.com/MajotraderLucky/Utils/logger"
 	"github.com/adshao/go-binance/v2"
 	"github.com/stretchr/testify/assert"
@@ -136,3 +137,27 @@ func (m *MarketDataService) GetDebthData() error {
 }
 
 // --------End of TestGetDebthData_SuccessfulRequest--------------------------
+
+func TestGetAPIKeys(t *testing.T) {
+	// Set environment variable values for the API keys
+	os.Setenv("BINANCE_API_KEY", "my-api-key")
+	os.Setenv("BINANCE_SECRET_KEY", "my-secret-key")
+
+	// Call the GetAPIKeys() function
+	apiKey, secretKey := klinesdata.GetAPIKeys()
+
+	// Check that the retrieved keys match the set values
+	expectedAPIKey := "my-api-key"
+	if apiKey != expectedAPIKey {
+		t.Errorf("Expected API key: %s, but got: %s", expectedAPIKey, apiKey)
+	}
+
+	expectedSecretKey := "my-secret-key"
+	if secretKey != expectedSecretKey {
+		t.Errorf("Expected secret key: %s, but got: %s", expectedSecretKey, secretKey)
+	}
+
+	// Clear the environment variable values after the test is complete
+	os.Unsetenv("BINANCE_API_KEY")
+	os.Unsetenv("BINANCE_SECRET_KEY")
+}
