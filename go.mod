@@ -3,7 +3,7 @@ module rangebotlog
 go 1.20
 
 require (
-	github.com/MajotraderLucky/MarketRepository v0.0.0-20231001113735-c435f853580b // indirect
+	github.com/MajotraderLucky/MarketRepository v0.0.0-20231007142923-26ea917106e2 // indirect
 	github.com/MajotraderLucky/Utils v0.0.0-20230831234517-5ffc888064d2 // indirect
 	github.com/adshao/go-binance/v2 v2.4.5 // indirect
 	github.com/bitly/go-simplejson v0.5.0 // indirect
