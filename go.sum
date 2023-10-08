@@ -57,6 +57,16 @@ github.com/MajotraderLucky/MarketRepository v0.0.0-20231001113735-c435f853580b h
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231001113735-c435f853580b/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231007142923-26ea917106e2 h1:5yFMEr+i/f8ArJdJl8vnCmVKAoXSRqXW6E/h7E5/F0o=
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231007142923-26ea917106e2/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231007153753-9e967dd848fd h1:ye0V0ZMweulrFRHuCW/L07rIexV9ICcQdJYTM2GCgfU=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231007153753-9e967dd848fd/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231007155719-96f72ff15345 h1:zL9nc2Qo98PZ10GzyUYwV/i3gTiDbf3pgzd0/5Se8wY=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231007155719-96f72ff15345/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231007160527-60fd91ffdb41 h1:Us2ac5QbHJeX+JLrZxUsYmCclOggSCWtOwIDt6w3nK0=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231007160527-60fd91ffdb41/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231007174655-374661feaa92 h1:PY5midXV/piyp0m5AI4ddnt6bXZ2go9UBODn5nSGgGs=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231007174655-374661feaa92/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231008011005-cd77892d9ff4 h1:g9DdFSpAkmobabG6PuV9qmUNlRpUd39fNTu5KvG0yVc=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231008011005-cd77892d9ff4/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
 github.com/MajotraderLucky/Utils v0.0.0-20230825021439-1d31827d98dd h1:U5+fhXtTABqGgd9XTK4ogdviXBm4HeCakDCoAJnDuC0=
 github.com/MajotraderLucky/Utils v0.0.0-20230825021439-1d31827d98dd/go.mod h1:JGfgTvWuN34FDH9ax09WEJmHxpB4hua3UHcywEQHgO0=
 github.com/MajotraderLucky/Utils v0.0.0-20230831234517-5ffc888064d2 h1:bc1+BIgPkgHVT2EHC+Cp+Ww8tvzj1nYLQVtL8byeD4w=

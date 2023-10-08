@@ -1,15 +1,18 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 	"strings"
 	"testing"
 
 	"github.com/MajotraderLucky/MarketRepository/initlog"
+	"github.com/MajotraderLucky/MarketRepository/klinesdata"
 	"github.com/MajotraderLucky/MarketRepository/positionlog"
 	"github.com/MajotraderLucky/Utils/logger"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
 
 func TestCheckFilesExist(t *testing.T) {
@@ -114,4 +117,65 @@ func TestWritePositionsToFile(t *testing.T) {
 	if err == nil {
 		t.Fatal("Expected an error when calling WritePositionsToFile with data without BTCUSDT position, got no error")
 	}
+}
+
+// Create a mock for futuresClient with a predictable response
+type MockFuturesClient struct {
+	mock.Mock
+}
+
+func (m *MockFuturesClient) NewKlinesService() klinesdata.KlinesService {
+	args := m.Called()
+	return args.Get(0).(klinesdata.KlinesService)
+}
+
+type MockKlinesService struct {
+	mock.Mock
+}
+
+func (m *MockKlinesService) Symbol(symbol string) klinesdata.KlinesService {
+	m.Called(symbol)
+	return m
+}
+
+func (m *MockKlinesService) Interval(interval string) klinesdata.KlinesService {
+	m.Called(interval)
+	return m
+}
+
+func (m *MockKlinesService) Do(ctx context.Context, opts ...klinesdata.RequestOption) ([]*klinesdata.Kline, error) {
+	args := m.Called(ctx)
+	return args.Get(0).([]*klinesdata.Kline), args.Error(1)
+}
+
+func TestFindMinMaxInfo2(t *testing.T) {
+	mockClient := new(MockFuturesClient)
+
+	expectedKlines := []*klinesdata.Kline{
+		{
+			High: "12000",
+			Low:  "9000",
+		},
+	}
+
+	mockService := new(MockKlinesService)
+
+	// Mock function calls
+	mockClient.On("NewKlinesService").Return(mockService)
+	mockService.On("Symbol", "BTCUSDT").Return(mockService)
+	mockService.On("Interval", "15m").Return(mockService)
+	mockService.On("Do", mock.Anything).Return(expectedKlines, nil)
+
+	max, min, err := klinesdata.FindMinMaxInfo2(mockClient)
+
+	// Verification assertions
+	assert.NoError(t, err)
+	assert.Equal(t, float64(12000), max)
+	assert.Equal(t, float64(9000), min)
+
+	// Check that the functions were called
+	mockClient.AssertCalled(t, "NewKlinesService")
+	mockService.AssertCalled(t, "Symbol", "BTCUSDT")
+	mockService.AssertCalled(t, "Interval", "15m")
+	mockService.AssertCalled(t, "Do", mock.Anything)
 }

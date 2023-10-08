@@ -44,6 +44,7 @@ func main() {
 
 	klinesdata.GetDebthData()
 	klinesdata.KlinesInfo()
+	klinesdata.FindMinMaxInfo()
 
 	logger.CleanLog()
 }
