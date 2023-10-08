@@ -166,7 +166,7 @@ func TestFindMinMaxInfo2(t *testing.T) {
 	mockService.On("Interval", "15m").Return(mockService)
 	mockService.On("Do", mock.Anything).Return(expectedKlines, nil)
 
-	max, min, err := klinesdata.FindMinMaxInfo2(mockClient)
+	max, min, err := klinesdata.FindMinMaxInfoTest(mockClient)
 
 	// Verification assertions
 	assert.NoError(t, err)
