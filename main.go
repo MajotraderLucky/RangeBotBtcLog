@@ -45,6 +45,7 @@ func main() {
 	klinesdata.GetDebthData()
 	klinesdata.KlinesInfo()
 	klinesdata.FindMinMaxInfo()
+	klinesdata.GetFibonacciLevels()
 
 	logger.CleanLog()
 }
