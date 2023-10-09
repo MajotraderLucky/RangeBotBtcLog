@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -178,4 +179,66 @@ func TestFindMinMaxInfo2(t *testing.T) {
 	mockService.AssertCalled(t, "Symbol", "BTCUSDT")
 	mockService.AssertCalled(t, "Interval", "15m")
 	mockService.AssertCalled(t, "Do", mock.Anything)
+}
+
+// Define the testLogger type
+type testLogger struct {
+	messages []string
+}
+
+func (tl *testLogger) Println(v ...interface{}) {
+	message := fmt.Sprint(v...)
+	tl.messages = append(tl.messages, message)
+}
+
+func (tl *testLogger) Fatalf(format string, v ...interface{}) {
+	message := fmt.Sprintf(format, v...)
+	tl.messages = append(tl.messages, message)
+	panic(message)
+}
+
+func TestGetFibonacciLevels_ZeroRange(t *testing.T) {
+	// Create a testLogger
+	logger := &testLogger{}
+
+	// Define minMaxFunc as a function
+	minMaxFunc := func() (float64, float64, error) {
+		return 28450, 27156, nil // Replace with the actual logic to get max and min
+	}
+
+	// Call GetFibonacciLevelsTest with the logger and minMaxFunc
+	longFib236, longFib382, longFib500, longFib618, longFib786, err := klinesdata.GetFibonacciLevelsTest(logger, minMaxFunc)
+
+	// Check for errors
+	if err != nil {
+		t.Errorf("Expected no error, but got: %s", err)
+	}
+
+	// Define your expected values as float64
+	expectedLongFib236 := 28144.616
+	expectedLongFib382 := 27955.692
+	expectedLongFib500 := 27803.0 // Convert to float64
+	expectedLongFib618 := 27650.308
+	expectedLongFib786 := 27432.916
+
+	// Check each Fibonacci level against the expected values
+	if longFib236 != expectedLongFib236 {
+		t.Errorf("Expected Fibonacci 236 level to be %v but got: %v", expectedLongFib236, longFib236)
+	}
+
+	if longFib382 != expectedLongFib382 {
+		t.Errorf("Expected Fibonacci 382 level to be %v but got: %v", expectedLongFib382, longFib382)
+	}
+
+	if longFib500 != expectedLongFib500 {
+		t.Errorf("Expected Fibonacci 500 level to be %v but got: %v", expectedLongFib500, longFib500)
+	}
+
+	if longFib618 != expectedLongFib618 {
+		t.Errorf("Expected Fibonacci 618 level to be %v but got: %v", expectedLongFib618, longFib618)
+	}
+
+	if longFib786 != expectedLongFib786 {
+		t.Errorf("Expected Fibonacci 786 level to be %v but got: %v", expectedLongFib786, longFib786)
+	}
 }
