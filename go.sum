@@ -97,6 +97,8 @@ github.com/MajotraderLucky/Utils v0.0.0-20230825021439-1d31827d98dd h1:U5+fhXtTA
 github.com/MajotraderLucky/Utils v0.0.0-20230825021439-1d31827d98dd/go.mod h1:JGfgTvWuN34FDH9ax09WEJmHxpB4hua3UHcywEQHgO0=
 github.com/MajotraderLucky/Utils v0.0.0-20230831234517-5ffc888064d2 h1:bc1+BIgPkgHVT2EHC+Cp+Ww8tvzj1nYLQVtL8byeD4w=
 github.com/MajotraderLucky/Utils v0.0.0-20230831234517-5ffc888064d2/go.mod h1:JGfgTvWuN34FDH9ax09WEJmHxpB4hua3UHcywEQHgO0=
+github.com/MajotraderLucky/Utils v0.0.0-20231010220817-4ce1c3682c20 h1:Rb1pyq1fAs5m00kVa5I63nrEobjWcViRvCpWgiCLAa8=
+github.com/MajotraderLucky/Utils v0.0.0-20231010220817-4ce1c3682c20/go.mod h1:JGfgTvWuN34FDH9ax09WEJmHxpB4hua3UHcywEQHgO0=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/adshao/go-binance/v2 v2.4.5 h1:V3KpolmS9a7TLVECSrl2gYm+GGBSxhVk9ILaxvOTOVw=
 github.com/adshao/go-binance/v2 v2.4.5/go.mod h1:41Up2dG4NfMXpCldrDPETEtiOq+pHoGsFZ73xGgaumo=
