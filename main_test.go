@@ -242,3 +242,31 @@ func TestGetFibonacciLevels_ZeroRange(t *testing.T) {
 		t.Errorf("Expected Fibonacci 786 level to be %v but got: %v", expectedLongFib786, longFib786)
 	}
 }
+
+func TestFindPriceCorridor_NormalValues(t *testing.T) {
+	// Arrange
+	mockFindMinMaxInfo := func() (float64, float64, error) {
+		return 20, 10, nil
+	}
+
+	mockLogger := &MockLogger{t: t}
+
+	// Act
+	priceCorridor, err := klinesdata.FindPriceCorridorTest(mockLogger, mockFindMinMaxInfo)
+
+	// Assert
+	assert.NoError(t, err)
+	assert.Equal(t, 50.0, priceCorridor)
+}
+
+type MockLogger struct {
+	t *testing.T
+}
+
+func (m *MockLogger) Println(v ...interface{}) {
+	m.t.Logf("Println called: %v", v)
+}
+
+func (m *MockLogger) Fatalf(format string, v ...interface{}) {
+	m.t.Logf("Fatalf called: format=%s, v=%v", format, v)
+}
