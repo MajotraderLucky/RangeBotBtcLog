@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/MajotraderLucky/MarketRepository v0.0.0-20231010210912-8a12d5315a39 // indirect
-	github.com/MajotraderLucky/Utils v0.0.0-20231010220817-4ce1c3682c20 // indirect
+	github.com/MajotraderLucky/Utils v0.0.0-20231010235318-416edd9d940b // indirect
 	github.com/adshao/go-binance/v2 v2.4.5 // indirect
 	github.com/axw/gocov v1.1.0 // indirect
 	github.com/bitly/go-simplejson v0.5.0 // indirect
