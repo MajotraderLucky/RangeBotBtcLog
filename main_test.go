@@ -270,3 +270,42 @@ func (m *MockLogger) Println(v ...interface{}) {
 func (m *MockLogger) Fatalf(format string, v ...interface{}) {
 	m.t.Logf("Fatalf called: format=%s, v=%v", format, v)
 }
+
+func TestCleanLogCountLines(t *testing.T) {
+	l := &logger.Logger{}
+
+	_ = l.CreateLogsDir()
+	_ = l.OpenLogFile()
+	l.SetLogger()
+
+	// Записываем строки в лог с использованием log.Printf
+	for i := 1; i <= 200; i++ {
+		log.Printf("Log Line %d", i)
+	}
+
+	n := 100
+	l.CleanLogCountLines(n)
+
+	// Проверьте, что файл журнала содержит n строк
+	data, err := os.ReadFile("logs/log.txt")
+	if err != nil {
+		t.Errorf("Failed to read log file: %s", err.Error())
+	}
+
+	lines := strings.Split(strings.TrimSuffix(string(data), "\n"), "\n")
+
+	if len(lines) != n {
+		t.Errorf("Expected logFile to contain %d lines but got %d lines", n, len(lines))
+	}
+
+	for i, line := range lines {
+		if line == "" {
+			continue
+		}
+
+		expectedSubString := fmt.Sprintf("Log Line %d", i+102)
+		if !strings.Contains(line, expectedSubString) {
+			t.Errorf("Expected line to contain '%s', got '%s'", expectedSubString, line)
+		}
+	}
+}
