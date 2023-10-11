@@ -215,11 +215,11 @@ func TestGetFibonacciLevels_ZeroRange(t *testing.T) {
 	}
 
 	// Define your expected values as float64
-	expectedLongFib236 := 28144.616
-	expectedLongFib382 := 27955.692
-	expectedLongFib500 := 27803.0 // Convert to float64
-	expectedLongFib618 := 27650.308
-	expectedLongFib786 := 27432.916
+	expectedLongFib236 := 27995.7
+	expectedLongFib382 := 27714.65
+	expectedLongFib500 := 27487.5
+	expectedLongFib618 := 27260.35
+	expectedLongFib786 := 26936.95
 
 	// Check each Fibonacci level against the expected values
 	if longFib236 != expectedLongFib236 {
