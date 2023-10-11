@@ -47,6 +47,7 @@ func main() {
 	klinesdata.FindMinMaxInfo()
 	klinesdata.GetFibonacciLevels()
 	klinesdata.FindPriceCorridor()
+	klinesdata.IsCorridorHigher(5)
 
 	logger.CleanLogCountLines(200)
 }
