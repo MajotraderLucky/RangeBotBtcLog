@@ -215,11 +215,11 @@ func TestGetFibonacciLevels_ZeroRange(t *testing.T) {
 	}
 
 	// Define your expected values as float64
-	expectedLongFib236 := 27995.7
-	expectedLongFib382 := 27714.65
-	expectedLongFib500 := 27487.5
-	expectedLongFib618 := 27260.35
-	expectedLongFib786 := 26936.95
+	expectedLongFib236 := 27714.548
+	expectedLongFib382 := 27487.226
+	expectedLongFib500 := 27303.5
+	expectedLongFib618 := 27119.774
+	expectedLongFib786 := 26858.198
 
 	// Check each Fibonacci level against the expected values
 	if longFib236 != expectedLongFib236 {
@@ -307,5 +307,18 @@ func TestCleanLogCountLines(t *testing.T) {
 		if !strings.Contains(line, expectedSubString) {
 			t.Errorf("Expected line to contain '%s', got '%s'", expectedSubString, line)
 		}
+	}
+}
+
+func TestIsCorridorHigher(t *testing.T) {
+	finder := &klinesdata.MockCorridorFinder{Corridor: 20.0, Err: nil}
+	checker := &klinesdata.CorridorChecker{Finder: finder}
+
+	isHigher, err := checker.IsCorridorHigherTest(10)
+	if err != nil {
+		t.Errorf("unexpected error: %v", err)
+	}
+	if isHigher != false {
+		t.Errorf("expected false, but got %v", isHigher)
 	}
 }

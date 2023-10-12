@@ -1,6 +1,30 @@
-func TestGetFibonacciLevelsTest(t *testing.T) {
-    logger := &testLogger{}
-    klinesdata.GetFibonacciLevelsTest(logger)
+type CorridorFinder interface {
+	FindPriceCorridor() (float64, error)
+}
 
-    // Add your assertions here to check the log messages if needed
+type CorridorChecker struct {
+	finder CorridorFinder
+}
+
+func (cc *CorridorChecker) IsCorridorHigher(threshold int) (bool, error) {
+	priceCorridorPercent, err := cc.finder.FindPriceCorridor()
+	...
+}
+
+type MockCorridorFinder struct {
+	corridor float64
+	err      error
+}
+
+func (m *MockCorridorFinder) FindPriceCorridor() (float64, error) {
+	return m.corridor, m.err
+}
+
+func TestIsCorridorHigher(t *testing.T) {
+	// Теперь вы можете мокировать FindPriceCorridor() и контролировать его поведение в ваших тестах.
+	finder := &MockCorridorFinder{corridor: 20.0, err: nil}
+	checker := &CorridorChecker{finder: finder}
+
+	isHigher, err := checker.IsCorridorHigher(10)
+	...
 }
