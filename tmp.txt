@@ -1,30 +1,17 @@
-type CorridorFinder interface {
-	FindPriceCorridor() (float64, error)
+func IsAskPriceHigherThanLongFib236(askPriceStr string, longFib236Str string) (bool, error) {
+	askPrice, err := strconv.ParseFloat(askPriceStr, 64)
+	if err != nil {
+		return false, err
+	}
+
+	longFib236, err := strconv.ParseFloat(longFib236Str, 64)
+	if err != nil {
+		return false, err
+	}
+
+	return askPrice > longFib236, nil
 }
 
-type CorridorChecker struct {
-	finder CorridorFinder
-}
-
-func (cc *CorridorChecker) IsCorridorHigher(threshold int) (bool, error) {
-	priceCorridorPercent, err := cc.finder.FindPriceCorridor()
-	...
-}
-
-type MockCorridorFinder struct {
-	corridor float64
-	err      error
-}
-
-func (m *MockCorridorFinder) FindPriceCorridor() (float64, error) {
-	return m.corridor, m.err
-}
-
-func TestIsCorridorHigher(t *testing.T) {
-	// Теперь вы можете мокировать FindPriceCorridor() и контролировать его поведение в ваших тестах.
-	finder := &MockCorridorFinder{corridor: 20.0, err: nil}
-	checker := &CorridorChecker{finder: finder}
-
-	isHigher, err := checker.IsCorridorHigher(10)
-	...
+func IsAskPriceHigherThanLongFib236(askPriceStr string) errror {
+	
 }

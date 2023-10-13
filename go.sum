@@ -107,6 +107,16 @@ github.com/MajotraderLucky/MarketRepository v0.0.0-20231012041210-5fadb3e87892 h
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231012041210-5fadb3e87892/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231012050009-c3070661396d h1:irwQePQVsT0RdvRMHNjMZRGDuA8+PrUPjojJq1mSqzs=
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231012050009-c3070661396d/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231013165931-0b0de48e71b0 h1:TO3ebMZSFAWLrZVBgb6p9auVVUDPi+xxqBFCPbWAu4U=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231013165931-0b0de48e71b0/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231013173230-4bb067a50531 h1:wBSLHYvfdEJJR8d9NJ64AJ17m1pgV8RALv6GFDwvKlU=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231013173230-4bb067a50531/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231013204730-c8e8880a7224 h1:g/0sAU6upxNpK/a3Z0S4444YfpsZQIzlOrz9J6JlcOk=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231013204730-c8e8880a7224/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231013205705-3ee4d9a1eb71 h1:1rJ9q94idFROAYDbt062w7i3U1WNgXmqyEccflM8Nk4=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231013205705-3ee4d9a1eb71/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231013212309-1c45dad7651d h1:C/UHbfWNTJx3qaog+GOO3PPSZqhtfOE7QaTcNxIgY1w=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231013212309-1c45dad7651d/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
 github.com/MajotraderLucky/Utils v0.0.0-20230825021439-1d31827d98dd h1:U5+fhXtTABqGgd9XTK4ogdviXBm4HeCakDCoAJnDuC0=
 github.com/MajotraderLucky/Utils v0.0.0-20230825021439-1d31827d98dd/go.mod h1:JGfgTvWuN34FDH9ax09WEJmHxpB4hua3UHcywEQHgO0=
 github.com/MajotraderLucky/Utils v0.0.0-20230831234517-5ffc888064d2 h1:bc1+BIgPkgHVT2EHC+Cp+Ww8tvzj1nYLQVtL8byeD4w=

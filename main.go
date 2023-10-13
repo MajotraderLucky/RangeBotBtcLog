@@ -45,9 +45,10 @@ func main() {
 	klinesdata.GetDebthData()
 	klinesdata.KlinesInfo()
 	klinesdata.FindMinMaxInfo()
-	klinesdata.GetFibonacciLevels()
+	klinesdata.GetFibonacciLevelsReturns()
 	klinesdata.FindPriceCorridor()
 	klinesdata.IsCorridorHigher(5)
+	klinesdata.IsAskPriceHigherThanLongFib()
 
 	logger.CleanLogCountLines(200)
 }
