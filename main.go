@@ -5,6 +5,7 @@ import (
 
 	"github.com/MajotraderLucky/MarketRepository/initlog"
 	"github.com/MajotraderLucky/MarketRepository/klinesdata"
+	"github.com/MajotraderLucky/MarketRepository/orderinfolog"
 	"github.com/MajotraderLucky/MarketRepository/positionlog"
 	"github.com/MajotraderLucky/Utils/logger"
 )
@@ -49,6 +50,8 @@ func main() {
 	klinesdata.FindPriceCorridor()
 	klinesdata.IsCorridorHigher(5)
 	klinesdata.IsAskPriceHigherThanLongFibRetLog()
+
+	orderinfolog.Hello()
 
 	logger.CleanLogCountLines(200)
 }
