@@ -322,3 +322,45 @@ func TestIsCorridorHigher(t *testing.T) {
 		t.Errorf("expected false, but got %v", isHigher)
 	}
 }
+
+// Test for the IsAskPriceHigherThanLongFibRetLogTest function
+type PriceGetterMock struct {
+	DataFunc func() (string, string, error)
+}
+
+func (pg *PriceGetterMock) GetDebthData() (string, string, error) {
+	return pg.DataFunc()
+}
+
+type FibLevelCalculatorMock struct {
+	FibFunc func() ([]float64, error)
+}
+
+func (flc *FibLevelCalculatorMock) GetFibonacciLevelsReturns() ([]float64, error) {
+	return flc.FibFunc()
+}
+
+func TestIsAskPriceHigherThanLongFibRetLogTest(t *testing.T) {
+	pc := &klinesdata.PriceChecker{
+		PGetter: &PriceGetterMock{DataFunc: func() (string, string, error) {
+			// Return the data you want to use for the test
+			return "100", "", nil
+		}},
+		FLCalculator: &FibLevelCalculatorMock{FibFunc: func() ([]float64, error) {
+			// Return the data you want to use for the test
+			return []float64{80, 70, 60, 50, 40}, nil
+		}},
+	}
+
+	res, ok := pc.IsAskPriceHigherThanLongFibRetLogTest()
+	if !ok {
+		t.Fatalf("Expected true, got false")
+	}
+
+	expectedRes := "LongFib236"
+	if res != expectedRes {
+		t.Fatalf("Unexpected result. Expected %v, got %v", expectedRes, res)
+	}
+}
+
+// -----------------------------------------------------------
