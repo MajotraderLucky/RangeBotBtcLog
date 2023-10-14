@@ -52,6 +52,7 @@ func main() {
 	klinesdata.IsAskPriceHigherThanLongFibRetLog()
 
 	orderinfolog.Hello()
+	orderinfolog.GetOpenOrdersInfoJson()
 
 	logger.CleanLogCountLines(200)
 }

@@ -1,41 +1,49 @@
-type PriceGetter interface {
-	GetDebthData() (string, string, error)
+package main
+
+import (
+    "context"
+	"encoding/json"
+	"log"
+	"os"
+	// добавьте сюда свои binance и другие используемые пакеты...
+)
+
+type Output struct {
+	Orders   []Order `json:"orders"`
+    NumOpened int    `json:"numOpened"`
 }
 
-type FibLevelCalculator interface {
-	GetFibonacciLevelsReturns() ([]float64, error)
-}
+func GetOpenOrdersInfo() {
+	apiKey, secretKey := GetAPIKeys()
 
-type PriceChecker struct {
-	PGetter   PriceGetter
-	FLCalculator FibLevelCalculator
-}
-
-func (pc *PriceChecker) IsAskPriceHigherThanLongFibRetLog() (string, bool) {
-	askPrice, _, err := pc.PGetter.GetDebthData()
+	futuresClient := binance.NewFuturesClient(apiKey, secretKey)
+	
+	// Предположим, что функция NewListOpenOrdersService() возвращает []Order
+	openOrders, err := futuresClient.NewListOpenOrdersService().Symbol("BTCUSDT").
+		Do(context.Background())
 	if err != nil {
-		log.Fatalf("Error getting ask price: %v", err)
-		return "", false
+		log.Println(err)
+		return
 	}
 
-	askPriceFloat64, err := strconv.ParseFloat(askPrice, 64)
+	// Создайте файл для записи
+	file, err := os.Create("orders.json")
 	if err != nil {
-		log.Fatalf("Error converting ask price to float: %v", err)
-		return "", false
+		log.Println(err)
+		return
+	}
+	defer file.Close()
+
+	// Создайте экземпляр Output и добавьте заказы и количество открытых заказов
+	output := &Output{
+		Orders:    openOrders,
+		NumOpened: len(openOrders),
 	}
 
-	longFibSlice, err := pc.FLCalculator.GetFibonacciLevelsReturns()
-	if err != nil {
-		log.Fatalf("Error getting Fibonacci level: %v", err)
-		return "", false
-	}
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "\t") // для красивого вывода JSON
 
-	if askPriceFloat64 > longFibSlice[0] {
-		log.Printf("Price is higher than LongFib236")
-		return "LongFib236", true
+	if err := encoder.Encode(output); err != nil {
+		log.Println(err)
 	}
-    // Proceed with remaining if checks...
-   
-    // and then ends with logging that price is not higher than any level...
-	return "", false
 }
