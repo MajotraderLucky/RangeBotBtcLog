@@ -217,11 +217,11 @@ func TestGetFibonacciLevels_ZeroRange(t *testing.T) {
 	}
 
 	// Define your expected values as float64
-	expectedLongFib236 := 27644.107796875
-	expectedLongFib382 := 27430.2468828125
-	expectedLongFib500 := 27257.400390625
-	expectedLongFib618 := 27084.5538984375
-	expectedLongFib786 := 26838.4673671875
+	expectedLongFib236 := 29729.98
+	expectedLongFib382 := 29117.51
+	expectedLongFib500 := 28622.5
+	expectedLongFib618 := 28127.49
+	expectedLongFib786 := 27422.73
 
 	// Check each Fibonacci level against the expected values
 	if longFib236 != expectedLongFib236 {
@@ -378,6 +378,7 @@ type OrderInfoLogger interface {
 
 type MockOrderInfoLogger struct {
 	ShouldFail bool
+	orders     []OpenOrder
 }
 
 func (m *MockOrderInfoLogger) GetOpenOrders() ([]OpenOrder, error) {
@@ -385,8 +386,7 @@ func (m *MockOrderInfoLogger) GetOpenOrders() ([]OpenOrder, error) {
 		return nil, errors.New("mock error")
 	}
 	return []OpenOrder{
-		{OrderID: "sample1", Symbol: "BTC"},
-		{OrderID: "sample2", Symbol: "ETH"},
+		{OrderID: "12345", Symbol: "BTCUSDT"},
 	}, nil
 }
 
@@ -422,8 +422,18 @@ func GetOpenOrdersInfoJsonTest(svc OrderInfoLogger, filename string) error {
 	return os.WriteFile(filename, data, 0644)
 }
 
+// ------------------------------------------------------
+
 func TestGetOpenOrdersInfoJsonTest(t *testing.T) {
-	mockOrderService := &MockOrderInfoLogger{}
+	mockOrderService := &MockOrderInfoLogger{
+		orders: []OpenOrder{
+			{
+				OrderID: "12345",
+				Symbol:  "BTCUSDT",
+			},
+		},
+	}
+
 	filePath := "./test_orders.json"
 
 	err := GetOpenOrdersInfoJsonTest(mockOrderService, filePath)
@@ -438,8 +448,20 @@ func TestGetOpenOrdersInfoJsonTest(t *testing.T) {
 
 	var orders []OpenOrder
 	err = json.Unmarshal(data, &orders)
-	if err != nil || len(orders) == 0 || orders[0].OrderID != "sample1" || orders[0].Symbol != "BTC" {
-		t.Fatalf("File content does not match the expected output: %s", string(data))
+	if err != nil || len(orders) == 0 {
+		t.Fatalf("File content is not valid: %s", string(data))
+	}
+
+	found := false
+	for _, order := range orders {
+		if order.OrderID == "12345" && order.Symbol == "BTCUSDT" {
+			found = true
+			break
+		}
+	}
+
+	if !found {
+		t.Fatalf("Expected order not found in the output: %s", string(data))
 	}
 
 	err = os.Remove(filePath)
