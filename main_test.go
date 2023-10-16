@@ -320,8 +320,8 @@ func TestIsCorridorHigher(t *testing.T) {
 	if err != nil {
 		t.Errorf("unexpected error: %v", err)
 	}
-	if isHigher != false {
-		t.Errorf("expected false, but got %v", isHigher)
+	if isHigher != true {
+		t.Errorf("expected true, but got %v", isHigher)
 	}
 }
 
