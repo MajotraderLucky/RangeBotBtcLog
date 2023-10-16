@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -364,3 +366,84 @@ func TestIsAskPriceHigherThanLongFibRetLogTest(t *testing.T) {
 }
 
 // -----------------------------------------------------------
+
+type OpenOrder struct {
+	OrderID string
+	Symbol  string
+}
+
+type OrderInfoLogger interface {
+	GetOpenOrders() ([]OpenOrder, error)
+}
+
+type MockOrderInfoLogger struct {
+	ShouldFail bool
+}
+
+func (m *MockOrderInfoLogger) GetOpenOrders() ([]OpenOrder, error) {
+	if m.ShouldFail {
+		return nil, errors.New("mock error")
+	}
+	return []OpenOrder{
+		{OrderID: "sample1", Symbol: "BTC"},
+		{OrderID: "sample2", Symbol: "ETH"},
+	}, nil
+}
+
+func TestSomethingWithOpenOrder(t *testing.T) {
+	var order OpenOrder
+	order.OrderID = "12345"
+	order.Symbol = "BTCUSDT"
+
+	mockLogger := &MockOrderInfoLogger{}
+	orders, err := mockLogger.GetOpenOrders()
+
+	if err != nil {
+		t.Fatalf("Got unexpected error: %s", err.Error())
+	}
+
+	if len(orders) == 0 || orders[0].OrderID != order.OrderID || orders[0].Symbol != order.Symbol {
+		t.Fatalf("The order is not as expected: %#v", orders)
+	}
+}
+
+// GetOpenOrdersInfoJsonTest gets open order info and write it as JSON to the specified file
+func GetOpenOrdersInfoJsonTest(svc OrderInfoLogger, filename string) error {
+	orders, err := svc.GetOpenOrders()
+	if err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(orders)
+	if err != nil {
+		return err
+	}
+
+	return os.WriteFile(filename, data, 0644)
+}
+
+func TestGetOpenOrdersInfoJsonTest(t *testing.T) {
+	mockOrderService := &MockOrderInfoLogger{}
+	filePath := "./test_orders.json"
+
+	err := GetOpenOrdersInfoJsonTest(mockOrderService, filePath)
+	if err != nil {
+		t.Fatalf("Expected no error, got %s", err.Error())
+	}
+
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		t.Fatalf("Failed to read test file: %s", err.Error())
+	}
+
+	var orders []OpenOrder
+	err = json.Unmarshal(data, &orders)
+	if err != nil || len(orders) == 0 || orders[0].OrderID != "sample1" || orders[0].Symbol != "BTC" {
+		t.Fatalf("File content does not match the expected output: %s", string(data))
+	}
+
+	err = os.Remove(filePath)
+	if err != nil {
+		t.Fatalf("Failed to clean up test file: %s", err.Error())
+	}
+}
