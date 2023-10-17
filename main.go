@@ -7,6 +7,7 @@ import (
 	"github.com/MajotraderLucky/MarketRepository/klinesdata"
 	"github.com/MajotraderLucky/MarketRepository/orderinfolog"
 	"github.com/MajotraderLucky/MarketRepository/positionlog"
+	"github.com/MajotraderLucky/MarketRepository/tradinglog"
 	"github.com/MajotraderLucky/Utils/logger"
 )
 
@@ -49,10 +50,12 @@ func main() {
 	klinesdata.GetFibonacciLevelsReturns()
 	klinesdata.FindPriceCorridor()
 	klinesdata.IsCorridorHigher(5)
-	klinesdata.IsAskPriceHigherThanLongFibRetLog()
 
 	orderinfolog.Hello()
 	orderinfolog.GetOpenOrdersInfoJson()
+	logger.LogLine()
+
+	tradinglog.GetFiboLevelStartTrade()
 
 	logger.CleanLogCountLines(200)
 }

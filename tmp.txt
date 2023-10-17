@@ -1,49 +1,8 @@
-package main
-
-import (
-    "context"
-	"encoding/json"
-	"log"
-	"os"
-	// добавьте сюда свои binance и другие используемые пакеты...
-)
-
-type Output struct {
-	Orders   []Order `json:"orders"`
-    NumOpened int    `json:"numOpened"`
-}
-
-func GetOpenOrdersInfo() {
-	apiKey, secretKey := GetAPIKeys()
-
-	futuresClient := binance.NewFuturesClient(apiKey, secretKey)
-	
-	// Предположим, что функция NewListOpenOrdersService() возвращает []Order
-	openOrders, err := futuresClient.NewListOpenOrdersService().Symbol("BTCUSDT").
-		Do(context.Background())
-	if err != nil {
-		log.Println(err)
-		return
-	}
-
-	// Создайте файл для записи
-	file, err := os.Create("orders.json")
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	defer file.Close()
-
-	// Создайте экземпляр Output и добавьте заказы и количество открытых заказов
-	output := &Output{
-		Orders:    openOrders,
-		NumOpened: len(openOrders),
-	}
-
-	encoder := json.NewEncoder(file)
-	encoder.SetIndent("", "\t") // для красивого вывода JSON
-
-	if err := encoder.Encode(output); err != nil {
-		log.Println(err)
+func OtherFunction() {
+	fibLevel, isHigher := IsAskPriceHigherThanLongFibRetLog()
+	if isHigher {
+		fmt.Printf("The ask price is higher than %s Fibonacci retracement level.\n", fibLevel)
+	} else {
+		fmt.Println("The ask price is not higher than any Fibonacci retracement level.")
 	}
 }
