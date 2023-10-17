@@ -3,7 +3,7 @@ module rangebotlog
 go 1.20
 
 require (
-	github.com/MajotraderLucky/MarketRepository v0.0.0-20231016144316-3dab55777000
+	github.com/MajotraderLucky/MarketRepository v0.0.0-20231017122441-7e543ac7e74d
 	github.com/MajotraderLucky/Utils v0.0.0-20231010235318-416edd9d940b
 	github.com/stretchr/testify v1.8.4
 )
