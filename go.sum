@@ -32,6 +32,8 @@ github.com/MajotraderLucky/MarketRepository v0.0.0-20231112010339-f130ec6b9c91 h
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231112010339-f130ec6b9c91/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231112020816-9e1b7386d613 h1:yGAfkHncvzhyio16P49ZsJXrulebr/tr414aJZkMZHo=
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231112020816-9e1b7386d613/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231112051348-713a36bf3a45 h1:ZetkzCp5SuXendkqmgBFpH1rHFNop5nv9cEPO/r86Zc=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231112051348-713a36bf3a45/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
 github.com/MajotraderLucky/Utils v0.0.0-20231010235318-416edd9d940b h1:sTI8I1p3h4+KkHxs7LgA4IrG3iFrDURgVs8xgNP1X1k=
 github.com/MajotraderLucky/Utils v0.0.0-20231010235318-416edd9d940b/go.mod h1:JGfgTvWuN34FDH9ax09WEJmHxpB4hua3UHcywEQHgO0=
 github.com/adshao/go-binance/v2 v2.4.5 h1:V3KpolmS9a7TLVECSrl2gYm+GGBSxhVk9ILaxvOTOVw=
