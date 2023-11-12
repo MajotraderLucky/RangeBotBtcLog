@@ -57,5 +57,11 @@ func main() {
 
 	tradinglog.GetFiboLevelStartTrade()
 
+	if !orderinfolog.CheckIfOpenOrdersExist() {
+		log.Println("There are no open orders in the system")
+	} else {
+		log.Println("There are open orders in the system")
+	}
+
 	logger.CleanLogCountLines(200)
 }

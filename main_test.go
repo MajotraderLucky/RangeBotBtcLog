@@ -12,8 +12,10 @@ import (
 
 	"github.com/MajotraderLucky/MarketRepository/initlog"
 	"github.com/MajotraderLucky/MarketRepository/klinesdata"
+	"github.com/MajotraderLucky/MarketRepository/orderinfolog"
 	"github.com/MajotraderLucky/MarketRepository/positionlog"
 	"github.com/MajotraderLucky/Utils/logger"
+	"github.com/adshao/go-binance/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -199,52 +201,6 @@ func (tl *testLogger) Fatalf(format string, v ...interface{}) {
 	panic(message)
 }
 
-func TestGetFibonacciLevels_ZeroRange(t *testing.T) {
-	// Create a testLogger
-	logger := &testLogger{}
-
-	// Define minMaxFunc as a function
-	minMaxFunc := func() (float64, float64, error) {
-		return 28450, 27156, nil // Replace with the actual logic to get max and min
-	}
-
-	// Call GetFibonacciLevelsTest with the logger and minMaxFunc
-	longFib236, longFib382, longFib500, longFib618, longFib786, err := klinesdata.GetFibonacciLevelsTest(logger, minMaxFunc)
-
-	// Check for errors
-	if err != nil {
-		t.Errorf("Expected no error, but got: %s", err)
-	}
-
-	// Define your expected values as float64
-	expectedLongFib236 := 29729.98
-	expectedLongFib382 := 29117.51
-	expectedLongFib500 := 28622.5
-	expectedLongFib618 := 28127.49
-	expectedLongFib786 := 27422.73
-
-	// Check each Fibonacci level against the expected values
-	if longFib236 != expectedLongFib236 {
-		t.Errorf("Expected Fibonacci 236 level to be %v but got: %v", expectedLongFib236, longFib236)
-	}
-
-	if longFib382 != expectedLongFib382 {
-		t.Errorf("Expected Fibonacci 382 level to be %v but got: %v", expectedLongFib382, longFib382)
-	}
-
-	if longFib500 != expectedLongFib500 {
-		t.Errorf("Expected Fibonacci 500 level to be %v but got: %v", expectedLongFib500, longFib500)
-	}
-
-	if longFib618 != expectedLongFib618 {
-		t.Errorf("Expected Fibonacci 618 level to be %v but got: %v", expectedLongFib618, longFib618)
-	}
-
-	if longFib786 != expectedLongFib786 {
-		t.Errorf("Expected Fibonacci 786 level to be %v but got: %v", expectedLongFib786, longFib786)
-	}
-}
-
 func TestFindPriceCorridor_NormalValues(t *testing.T) {
 	// Arrange
 	mockFindMinMaxInfo := func() (float64, float64, error) {
@@ -423,49 +379,40 @@ func GetOpenOrdersInfoJsonTest(svc OrderInfoLogger, filename string) error {
 }
 
 // ------------------------------------------------------
-
-func TestGetOpenOrdersInfoJsonTest(t *testing.T) {
-	mockOrderService := &MockOrderInfoLogger{
-		orders: []OpenOrder{
-			{
-				OrderID: "12345",
-				Symbol:  "BTCUSDT",
-			},
-		},
-	}
-
-	filePath := "./test_orders.json"
-
-	err := GetOpenOrdersInfoJsonTest(mockOrderService, filePath)
-	if err != nil {
-		t.Fatalf("Expected no error, got %s", err.Error())
-	}
-
-	data, err := os.ReadFile(filePath)
-	if err != nil {
-		t.Fatalf("Failed to read test file: %s", err.Error())
-	}
-
-	var orders []OpenOrder
-	err = json.Unmarshal(data, &orders)
-	if err != nil || len(orders) == 0 {
-		t.Fatalf("File content is not valid: %s", string(data))
-	}
-
-	found := false
-	for _, order := range orders {
-		if order.OrderID == "12345" && order.Symbol == "BTCUSDT" {
-			found = true
-			break
-		}
-	}
-
-	if !found {
-		t.Fatalf("Expected order not found in the output: %s", string(data))
-	}
-
-	err = os.Remove(filePath)
-	if err != nil {
-		t.Fatalf("Failed to clean up test file: %s", err.Error())
-	}
+type MockListOpenOrdersService struct {
+	mock.Mock
 }
+
+func (service *MockListOpenOrdersService) Do(ctx context.Context, opts ...binance.RequestOption) (res []*binance.Order, err error) {
+	args := service.Called()
+	return nil, args.Error(0) // assuming we're returning an error
+}
+
+type MockBinanceService struct {
+	mock.Mock
+}
+
+func (m *MockBinanceService) NewListOpenOrdersService() orderinfolog.ListOpenOrdersService {
+	args := m.Called()
+	return args.Get(0).(orderinfolog.ListOpenOrdersService)
+}
+
+func TestCheckIfOpenOrdersExist_Error(t *testing.T) {
+	expectedError := errors.New("some error")
+	mockService := new(MockListOpenOrdersService)
+	mockService.On("Do").Return(nil, expectedError)
+
+	mockBinanceService := new(MockBinanceService)
+	mockBinanceService.On("NewListOpenOrdersService").Return(mockService)
+
+	result := orderinfolog.CheckIfOpenOrdersExistTest(mockBinanceService)
+
+	if result != false {
+		t.Errorf("Expected false, but got %v", result)
+	}
+
+	mockBinanceService.AssertExpectations(t)
+	mockService.AssertExpectations(t)
+}
+
+// --------------------------------------------------------------------

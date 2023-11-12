@@ -1,8 +1,13 @@
-func OtherFunction() {
-	fibLevel, isHigher := IsAskPriceHigherThanLongFibRetLog()
-	if isHigher {
-		fmt.Printf("The ask price is higher than %s Fibonacci retracement level.\n", fibLevel)
+func CheckIfOpenOrdersExist(service BinanceService) bool {
+	openOrders, err := service.NewListOpenOrdersService().Do(context.Background())
+	if err != nil {
+		log.Println(err)
+		return false
+	}
+
+	if len(openOrders) > 0 {
+		return true
 	} else {
-		fmt.Println("The ask price is not higher than any Fibonacci retracement level.")
+		return false
 	}
 }
