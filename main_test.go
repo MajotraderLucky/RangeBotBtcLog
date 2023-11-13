@@ -14,6 +14,7 @@ import (
 	"github.com/MajotraderLucky/MarketRepository/klinesdata"
 	"github.com/MajotraderLucky/MarketRepository/orderinfolog"
 	"github.com/MajotraderLucky/MarketRepository/positionlog"
+	"github.com/MajotraderLucky/MarketRepository/tradinglog"
 	"github.com/MajotraderLucky/Utils/logger"
 	"github.com/adshao/go-binance/v2"
 	"github.com/stretchr/testify/assert"
@@ -272,7 +273,7 @@ func TestIsCorridorHigher(t *testing.T) {
 	finder := &klinesdata.MockCorridorFinder{Corridor: 20.0, Err: nil}
 	checker := &klinesdata.CorridorChecker{Finder: finder}
 
-	isHigher, err := checker.IsCorridorHigherTest(10)
+	isHigher, err := checker.IsCorridorHigherTest(8)
 	if err != nil {
 		t.Errorf("unexpected error: %v", err)
 	}
@@ -416,3 +417,11 @@ func TestCheckIfOpenOrdersExist_Error(t *testing.T) {
 }
 
 // --------------------------------------------------------------------
+
+func TestInvalidInput(t *testing.T) {
+	_, err := tradinglog.GetFiboLevelStartTrade()
+	expectedErr := error(nil)
+	if err != expectedErr {
+		t.Errorf("Expected error message '%v', but got '%v'", expectedErr, err)
+	}
+}
