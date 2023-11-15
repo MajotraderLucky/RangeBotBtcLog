@@ -425,3 +425,22 @@ func TestInvalidInput(t *testing.T) {
 		t.Errorf("Expected error message '%v', but got '%v'", expectedErr, err)
 	}
 }
+
+func MockGetFiboLevelStartTradeOnce(response string, err error) *tradinglog.TradeLevels {
+	return &tradinglog.TradeLevels{
+		Response: response,
+		Error:    err,
+	}
+}
+
+func TestIsStopTradeLevel236MetWithNonStopTrade236Level(t *testing.T) {
+	// Настраиваем мок так, чтобы вернуть значение, отличное от "stopTrade236"
+	tradinglog.GetFiboLevelStartTradeOnce = func() *tradinglog.TradeLevels {
+		return MockGetFiboLevelStartTradeOnce("nonStopTrade236Level", nil)
+	}
+
+	// Проверяем, что IsStopTradeLevel236Met() возвращает false
+	if tradinglog.IsStopTradeLevel236Met() {
+		t.Errorf("Expected false for level other than stopTrade236, got true")
+	}
+}
