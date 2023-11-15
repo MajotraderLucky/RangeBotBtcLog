@@ -8,6 +8,7 @@ import (
 	"github.com/MajotraderLucky/MarketRepository/orderinfolog"
 	"github.com/MajotraderLucky/MarketRepository/positionlog"
 	"github.com/MajotraderLucky/MarketRepository/tradinglog"
+	"github.com/MajotraderLucky/MarketRepository/transactions"
 	"github.com/MajotraderLucky/Utils/logger"
 )
 
@@ -56,6 +57,11 @@ func main() {
 	logger.LogLine()
 
 	tradinglog.GetFiboLevelStartTrade()
+
+	logger.LogLine()
+	transactions.Hello()
+
+	transactions.CreateLimitOrder("0.005", "36100")
 
 	logger.CleanLogCountLines(200)
 }
