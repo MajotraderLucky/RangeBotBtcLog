@@ -61,7 +61,27 @@ func main() {
 	logger.LogLine()
 	transactions.Hello()
 
-	transactions.CreateLimitOrder("0.005", "36100")
+	floLevels, err := klinesdata.GetFibonacciLevelsReturns()
+	if err != nil {
+		log.Fatalf("Error getting Fibonacci levels: %v", err)
+	}
+
+	intLevels, err := klinesdata.ConvertFibonacciLevelsToInts(floLevels)
+	if err != nil {
+		log.Fatalf("Error converting Fibonacci levels to integers: %v", err)
+	}
+
+	log.Println("Fibonacci levels to ints", intLevels)
+
+	strLevels, err := klinesdata.ConvertIntsToStrings(intLevels)
+	if err != nil {
+		log.Fatalf("Error converting ints to strings: %v", err)
+	}
+	log.Println("Ints to strings", strLevels)
+
+	if tradinglog.IsStartTradeLevel382Met() {
+		transactions.CreateLimitOrder("0.003", strLevels[1])
+	}
 
 	logger.CleanLogCountLines(200)
 }
