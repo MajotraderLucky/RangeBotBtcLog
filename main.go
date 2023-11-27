@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/MajotraderLucky/MarketRepository/initlog"
 	"github.com/MajotraderLucky/MarketRepository/klinesdata"
@@ -109,6 +110,30 @@ func main() {
 	if openOrder786 {
 		transactions.CreateLimitOrder("0.006", strLevels[4])
 		log.Println("Created limit order for level 786")
+	}
+
+	file, err := os.Open("logs/orders.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	openStopLossOrder := !orderinfolog.CheckStopMarketOrders(file)
+
+	maxFloat64, minFloat64, err := klinesdata.FindMinMaxInfo()
+	if err != nil {
+		log.Fatalf("Error finding min and max values: %v", err)
+	}
+
+	maxString, minString, err := klinesdata.ConvertMaxMinToString(maxFloat64, minFloat64)
+	if err != nil {
+		log.Fatalf("Error converting max and min values to strings: %v", err)
+	}
+	log.Println("Max: ", maxString)
+	log.Println("Min: ", minString)
+
+	if openStopLossOrder {
+		transactions.CreatStopLossOrder("0.006", minString)
 	}
 
 	logger.CleanLogCountLines(200)
