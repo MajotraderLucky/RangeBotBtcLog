@@ -54,7 +54,7 @@ func main() {
 		klinesdata.FindMinMaxInfo()
 		klinesdata.GetFibonacciLevelsReturns()
 		klinesdata.FindPriceCorridor()
-		klinesdata.IsCorridorHigher(4)
+		klinesdata.IsCorridorHigher(5)
 
 		orderinfolog.Hello()
 		orderinfolog.GetOpenOrdersInfoJson()
