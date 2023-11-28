@@ -101,9 +101,12 @@ func main() {
 			log.Fatal(err)
 		}
 
-		openOrder382 := tradinglog.IsStartTradeLevel382Met() && positionAmt == "0.000"
-		openOrder500 := tradinglog.IsStartTradeLevel500Met() && positionAmt == "0.000"
-		openOrder618 := tradinglog.IsStartTradeLevel618Met() && positionAmt == "0.000"
+		openOrder382 := tradinglog.IsStartTradeLevel382Met() &&
+			positionAmt == "0.000" && !orderinfolog.CheckLimitOrders(file)
+		openOrder500 := tradinglog.IsStartTradeLevel500Met() &&
+			positionAmt == "0.000" && !orderinfolog.CheckLimitOrders(file)
+		openOrder618 := tradinglog.IsStartTradeLevel618Met() &&
+			positionAmt == "0.000" && !orderinfolog.CheckLimitOrders(file)
 		openOrder786 := tradinglog.IsStartTradeLevel786Met() &&
 			positionAmt == "0.000" && !orderinfolog.CheckLimitOrders(file)
 
