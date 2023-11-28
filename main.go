@@ -51,7 +51,7 @@ func main() {
 	klinesdata.FindMinMaxInfo()
 	klinesdata.GetFibonacciLevelsReturns()
 	klinesdata.FindPriceCorridor()
-	klinesdata.IsCorridorHigher(5)
+	klinesdata.IsCorridorHigher(4)
 
 	orderinfolog.Hello()
 	orderinfolog.GetOpenOrdersInfoJson()
@@ -118,7 +118,17 @@ func main() {
 	}
 	defer file.Close()
 
-	openStopLossOrder := !orderinfolog.CheckStopMarketOrders(file)
+	openStopLossOrder382 := openOrder382 &&
+		!orderinfolog.CheckStopMarketOrders(file)
+
+	openStopLossOrder500 := openOrder500 &&
+		!orderinfolog.CheckStopMarketOrders(file)
+
+	openStopLossOrder618 := openOrder618 &&
+		!orderinfolog.CheckStopMarketOrders(file)
+
+	openStopLossOrder786 := openOrder786 &&
+		!orderinfolog.CheckStopMarketOrders(file)
 
 	maxFloat64, minFloat64, err := klinesdata.FindMinMaxInfo()
 	if err != nil {
@@ -132,7 +142,19 @@ func main() {
 	log.Println("Max: ", maxString)
 	log.Println("Min: ", minString)
 
-	if openStopLossOrder {
+	if openStopLossOrder382 {
+		transactions.CreatStopLossOrder("0.003", strLevels[2])
+	}
+
+	if openStopLossOrder500 {
+		transactions.CreatStopLossOrder("0.004", strLevels[3])
+	}
+
+	if openStopLossOrder618 {
+		transactions.CreatStopLossOrder("0.005", strLevels[4])
+	}
+
+	if openStopLossOrder786 {
 		transactions.CreatStopLossOrder("0.006", minString)
 	}
 
