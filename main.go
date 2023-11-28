@@ -15,6 +15,7 @@ import (
 )
 
 func main() {
+	var file *os.File
 	for _ = range time.Tick(time.Second * 30) {
 		logger := logger.Logger{}
 		err := logger.CreateLogsDir()
@@ -89,16 +90,16 @@ func main() {
 		log.Println("Position Amt: ", positionAmt)
 		log.Println("Entry Price: ", entryPrice)
 
-		openOrder382 := tradinglog.IsStartTradeLevel382Met() && positionAmt == "0.000"
-		openOrder500 := tradinglog.IsStartTradeLevel500Met() && positionAmt == "0.000"
-		openOrder618 := tradinglog.IsStartTradeLevel618Met() && positionAmt == "0.000"
-		openOrder786 := tradinglog.IsStartTradeLevel786Met() && positionAmt == "0.000"
-
 		file, err := os.Open("logs/orders.json")
 		if err != nil {
 			log.Fatal(err)
 		}
-		defer file.Close()
+
+		openOrder382 := tradinglog.IsStartTradeLevel382Met() && positionAmt == "0.000"
+		openOrder500 := tradinglog.IsStartTradeLevel500Met() && positionAmt == "0.000"
+		openOrder618 := tradinglog.IsStartTradeLevel618Met() && positionAmt == "0.000"
+		openOrder786 := tradinglog.IsStartTradeLevel786Met() &&
+			positionAmt == "0.000" && !orderinfolog.CheckLimitOrders(file)
 
 		openTakeProfitOrder := !orderinfolog.CheckTakeProfitMarketOrders(file)
 
@@ -176,4 +177,6 @@ func main() {
 
 		logger.CleanLogCountLines(200)
 	}
+	defer file.Close()
+
 }
