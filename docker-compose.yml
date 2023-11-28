@@ -12,6 +12,7 @@ services:
       - TZ=Europe/Moscow
     networks:
       - botnetwork
+    restart: always
 
 networks:
   botnetwork:
