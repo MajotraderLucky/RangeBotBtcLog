@@ -6,3 +6,4 @@ logs/*
 log.txt
 logs/log.txt
 .gitignore
+tmp.txt

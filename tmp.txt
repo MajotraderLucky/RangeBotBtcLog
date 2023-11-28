@@ -1,13 +1,11 @@
-func CheckIfOpenOrdersExist(service BinanceService) bool {
-	openOrders, err := service.NewListOpenOrdersService().Do(context.Background())
-	if err != nil {
-		log.Println(err)
-		return false
-	}
-
-	if len(openOrders) > 0 {
-		return true
-	} else {
-		return false
-	}
+func processStopLossOrder(openOrder bool, stopLossValue string, level string) {
+    if openOrder {
+        transactions.CreatStopLossOrder(stopLossValue, level)
+    }
 }
+
+// Использование функции
+processStopLossOrder(openStopLossOrder382, "0.003", strLevels[2])
+processStopLossOrder(openStopLossOrder500, "0.004", strLevels[3])
+processStopLossOrder(openStopLossOrder618, "0.005", strLevels[4])
+processStopLossOrder(openStopLossOrder786, "0.006", minString)

@@ -14,6 +14,12 @@ import (
 	"github.com/MajotraderLucky/Utils/logger"
 )
 
+func processStopLossOrder(openOrder bool, stopLossValue string, level string) {
+	if openOrder {
+		transactions.CreatStopLossOrder(stopLossValue, level)
+	}
+}
+
 func main() {
 	var file *os.File
 	for _ = range time.Tick(time.Second * 30) {
@@ -159,21 +165,10 @@ func main() {
 		log.Println("Max: ", maxString)
 		log.Println("Min: ", minString)
 
-		if openStopLossOrder382 {
-			transactions.CreatStopLossOrder("0.003", strLevels[2])
-		}
-
-		if openStopLossOrder500 {
-			transactions.CreatStopLossOrder("0.004", strLevels[3])
-		}
-
-		if openStopLossOrder618 {
-			transactions.CreatStopLossOrder("0.005", strLevels[4])
-		}
-
-		if openStopLossOrder786 {
-			transactions.CreatStopLossOrder("0.006", minString)
-		}
+		processStopLossOrder(openStopLossOrder382, "0.003", strLevels[2])
+		processStopLossOrder(openStopLossOrder500, "0.004", strLevels[3])
+		processStopLossOrder(openStopLossOrder618, "0.005", strLevels[4])
+		processStopLossOrder(openStopLossOrder786, "0.006", minString)
 
 		logger.CleanLogCountLines(200)
 	}
