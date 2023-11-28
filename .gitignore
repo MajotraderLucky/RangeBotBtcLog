@@ -2,7 +2,6 @@
 .vscode
 test.log
 fileJson.json
-logs/*
 log.txt
 logs/log.txt
 .gitignore
