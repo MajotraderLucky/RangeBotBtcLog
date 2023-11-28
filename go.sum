@@ -66,6 +66,14 @@ github.com/MajotraderLucky/MarketRepository v0.0.0-20231127231608-1ac1a445f8ae h
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231127231608-1ac1a445f8ae/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231127234659-fdba442601ea h1:dR610sbsBzxpyYGvZy2suljeYYnbHegYNLbJ93pMP+4=
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231127234659-fdba442601ea/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231128002330-0b0901d5a367 h1:xfVfM/3taKh+06UazsNiEi8q35gLkFfrni/tBm7T3qY=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231128002330-0b0901d5a367/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231128004258-a6325320a227 h1:irP94tvgmHVTW/dqr9GOHA1KzGGE4bbvyUN4uoy/ji8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231128004258-a6325320a227/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231128014607-b05d985d0db8 h1:lS5V2o/VnqDxh8AzudApRNjz0UoG45vExWLEhgClMbk=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231128014607-b05d985d0db8/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231128014947-d04d806ec175 h1:EOYG61pSfQHX/dgShLOhvlEd3YHTj94Ofo4LYhBtyX4=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231128014947-d04d806ec175/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
 github.com/MajotraderLucky/Utils v0.0.0-20231010235318-416edd9d940b h1:sTI8I1p3h4+KkHxs7LgA4IrG3iFrDURgVs8xgNP1X1k=
 github.com/MajotraderLucky/Utils v0.0.0-20231010235318-416edd9d940b/go.mod h1:JGfgTvWuN34FDH9ax09WEJmHxpB4hua3UHcywEQHgO0=
 github.com/adshao/go-binance/v2 v2.4.5 h1:V3KpolmS9a7TLVECSrl2gYm+GGBSxhVk9ILaxvOTOVw=
