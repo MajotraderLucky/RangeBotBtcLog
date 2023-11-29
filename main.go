@@ -22,7 +22,7 @@ func processStopLossOrder(openOrder bool, stopLossValue string, level string) {
 
 func main() {
 	var file *os.File
-	for _ = range time.Tick(time.Second * 30) {
+	for range time.Tick(time.Second * 30) {
 		logger := logger.Logger{}
 		err := logger.CreateLogsDir()
 		if err != nil {
