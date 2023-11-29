@@ -3,6 +3,6 @@
 test.log
 fileJson.json
 log.txt
-logs/log.txt
+logs/
 .gitignore
 tmp.txt
