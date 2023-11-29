@@ -9,16 +9,11 @@ import (
 	"github.com/MajotraderLucky/MarketRepository/klinesdata"
 	"github.com/MajotraderLucky/MarketRepository/orderinfolog"
 	"github.com/MajotraderLucky/MarketRepository/positionlog"
+	"github.com/MajotraderLucky/MarketRepository/positionmanagement"
 	"github.com/MajotraderLucky/MarketRepository/tradinglog"
 	"github.com/MajotraderLucky/MarketRepository/transactions"
 	"github.com/MajotraderLucky/Utils/logger"
 )
-
-func processStopLossOrder(openOrder bool, stopLossValue string, level string) {
-	if openOrder {
-		transactions.CreatStopLossOrder(stopLossValue, level)
-	}
-}
 
 func main() {
 	var file *os.File
@@ -168,10 +163,12 @@ func main() {
 		log.Println("Max: ", maxString)
 		log.Println("Min: ", minString)
 
-		processStopLossOrder(openStopLossOrder382, "0.003", strLevels[2])
-		processStopLossOrder(openStopLossOrder500, "0.004", strLevels[3])
-		processStopLossOrder(openStopLossOrder618, "0.005", strLevels[4])
-		processStopLossOrder(openStopLossOrder786, "0.006", minString)
+		transactions.ProcessStopLossOrder(openStopLossOrder382, "0.003", strLevels[2])
+		transactions.ProcessStopLossOrder(openStopLossOrder500, "0.004", strLevels[3])
+		transactions.ProcessStopLossOrder(openStopLossOrder618, "0.005", strLevels[4])
+		transactions.ProcessStopLossOrder(openStopLossOrder786, "0.006", minString)
+
+		positionmanagement.Hello()
 
 		logger.CleanLogCountLines(200)
 	}
