@@ -82,6 +82,16 @@ github.com/MajotraderLucky/MarketRepository v0.0.0-20231129030935-8c970fbc1ff0 h
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231129030935-8c970fbc1ff0/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231129035543-030b67ee186b h1:CbUWsI/SM81Wsfg0A2BOjUucOvXf3pMHrJjD8Xg9x54=
 github.com/MajotraderLucky/MarketRepository v0.0.0-20231129035543-030b67ee186b/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231129044348-080e597074eb h1:24DxYtCVxfQmpYdh/Cd9EUqVk8jW6ejgYzX1iEm79w0=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231129044348-080e597074eb/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231129052123-09dd70cb3a62 h1:2auIsmSeogC6O+zDCoxx5iLtDapAAndd5DLhjH0eDI0=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231129052123-09dd70cb3a62/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231129054352-7741b466f2b3 h1:8PZ0ONUA9BCHb6R/2Ws7PL8OIFrMn5uBa9m0meTFcB8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231129054352-7741b466f2b3/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231203112009-a406a5ac3edd h1:gTWyC+9o4TJllY4+cvEp537x8ZdmzAuh08HRlbxRvlI=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231203112009-a406a5ac3edd/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231203114841-887655c9831a h1:xvUwX9ncQ6VPCYulFBBsdEhINxvZECfRuqf2WCWn/mU=
+github.com/MajotraderLucky/MarketRepository v0.0.0-20231203114841-887655c9831a/go.mod h1:pzrbNAzTHOCXZvOP0GlSbtpwuZOVaUx4SAWokdotQO8=
 github.com/MajotraderLucky/Utils v0.0.0-20231010235318-416edd9d940b h1:sTI8I1p3h4+KkHxs7LgA4IrG3iFrDURgVs8xgNP1X1k=
 github.com/MajotraderLucky/Utils v0.0.0-20231010235318-416edd9d940b/go.mod h1:JGfgTvWuN34FDH9ax09WEJmHxpB4hua3UHcywEQHgO0=
 github.com/adshao/go-binance/v2 v2.4.5 h1:V3KpolmS9a7TLVECSrl2gYm+GGBSxhVk9ILaxvOTOVw=

@@ -169,6 +169,15 @@ func main() {
 		transactions.ProcessStopLossOrder(openStopLossOrder786, "0.006", minString)
 
 		positionmanagement.Hello()
+		positionmanagement.GetPositionData()
+		positionmanagement.ConvertPositionDataToFloat64(positionAmt, entryPrice)
+		positionmanagement.GetFiboLevelStringNow()
+
+		fiboLevelFloat64, err := positionmanagement.GetFiboLevelFloat64Now()
+		if err != nil {
+			log.Fatalf("Error getting Fibonacci levels: %v", err)
+		}
+		log.Println("Fibo Level Float64: ", fiboLevelFloat64)
 
 		logger.CleanLogCountLines(200)
 	}
