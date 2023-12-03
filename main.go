@@ -173,11 +173,14 @@ func main() {
 		positionmanagement.ConvertPositionDataToFloat64(positionAmt, entryPrice)
 		positionmanagement.GetFiboLevelStringNow()
 
-		fiboLevelFloat64, err := positionmanagement.GetFiboLevelFloat64Now()
+		checkBuyOrderLevel, checkLossOrderLevel, checkTakeOrderLevel, err :=
+			positionmanagement.GetFiboLevelFloat64Now()
 		if err != nil {
 			log.Fatalf("Error getting Fibonacci levels: %v", err)
 		}
-		log.Println("Fibo Level Float64: ", fiboLevelFloat64)
+		log.Println("Check buy order level: ", checkBuyOrderLevel)
+		log.Println("Check loss order level: ", checkLossOrderLevel)
+		log.Println("Check take order level: ", checkTakeOrderLevel)
 
 		logger.CleanLogCountLines(200)
 	}
