@@ -190,6 +190,17 @@ func main() {
 			log.Println("Starting check levels...")
 		}
 
+		maxInt64, minInt64, buyOrderInt64, lossOrderInt64, profitOrderInt64,
+			err := positionmanagement.ConvertFiboLevelsMinMaxToInt()
+		if err != nil {
+			log.Fatalf("Error converting Fibonacci levels to integers: %v", err)
+		}
+		log.Println("Check buy order level int64: ", buyOrderInt64)
+		log.Println("Check loss order level int64: ", lossOrderInt64)
+		log.Println("Check take order level int64: ", profitOrderInt64)
+		log.Println("Max int64: ", maxInt64)
+		log.Println("Min int64: ", minInt64)
+
 		logger.CleanLogCountLines(200)
 	}
 	defer file.Close()
