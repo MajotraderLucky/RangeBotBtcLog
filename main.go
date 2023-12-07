@@ -201,7 +201,14 @@ func main() {
 		log.Println("Max int64: ", maxInt64)
 		log.Println("Min int64: ", minInt64)
 
-		logger.CleanLogCountLines(200)
+		stopOrderPrice, orderId, err := positionmanagement.GetStopLossOrderPrice(file)
+		if err != nil {
+			log.Fatalf("Error getting stop loss order price: %v", err)
+		}
+		log.Println("Stop loss order price: ", stopOrderPrice)
+		log.Println("Stop loss order id: ", orderId)
+
+		logger.CleanLogCountLines(250)
 	}
 	defer file.Close()
 
