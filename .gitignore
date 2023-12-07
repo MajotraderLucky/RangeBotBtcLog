@@ -7,3 +7,4 @@ logs/
 .gitignore
 tmp.txt
 logs/log.txt
+ordersSaveStopMarket.json
