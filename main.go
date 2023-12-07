@@ -201,12 +201,12 @@ func main() {
 		log.Println("Max int64: ", maxInt64)
 		log.Println("Min int64: ", minInt64)
 
-		stopOrderPrice, orderId, err := positionmanagement.GetStopLossOrderPrice(file)
+		stopOrderPriceFromJsonFile, stopOrderIdFromJsonFile, err := positionmanagement.GetStopOrderPriceAndId()
 		if err != nil {
-			log.Fatalf("Error getting stop loss order price: %v", err)
+			log.Println("Error finding stop order in to the orders.json", err)
 		}
-		log.Println("Stop loss order price: ", stopOrderPrice)
-		log.Println("Stop loss order id: ", orderId)
+		log.Println("Stop order price from json file: ", stopOrderPriceFromJsonFile)
+		log.Println("Stop order id from json file: ", stopOrderIdFromJsonFile)
 
 		logger.CleanLogCountLines(250)
 	}
