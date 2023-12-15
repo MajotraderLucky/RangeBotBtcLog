@@ -95,11 +95,6 @@ func main() {
 			log.Fatal(err)
 		}
 
-		ordersConfigFile, err := os.Open("configurations/ordersconfig.json")
-		if err != nil {
-			log.Fatal(err)
-		}
-
 		openOrder382 := tradinglog.IsStartTradeLevel382Met() &&
 			positionAmt == "0.000" && !orderinfolog.CheckLimitOrders(file)
 		openOrder500 := tradinglog.IsStartTradeLevel500Met() &&
@@ -178,9 +173,9 @@ func main() {
 
 		log.Println("Take profit condition: ", openTakeProfitOrder)
 
-		takeProfitQuantityFromJson, takeProfitPriceFromJson, err := orderinfolog.ReadOrdersConfig(ordersConfigFile)
+		takeProfitQuantityFromJson, takeProfitPriceFromJson, err := orderinfolog.ReadOrdersConfig()
 		if err != nil {
-			log.Fatalf("Error reading orders config file: %v", err)
+			log.Printf("Error reading orders config file: %v", err)
 		}
 		log.Println("Take profit quantity from json: ", takeProfitQuantityFromJson)
 		log.Println("Take profit price from json: ", takeProfitPriceFromJson)
