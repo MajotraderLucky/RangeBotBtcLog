@@ -95,6 +95,11 @@ func main() {
 			log.Fatal(err)
 		}
 
+		ordersConfigFile, err := os.Open("configurations/ordersconfig.json")
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		openOrder382 := tradinglog.IsStartTradeLevel382Met() &&
 			positionAmt == "0.000" && !orderinfolog.CheckLimitOrders(file)
 		openOrder500 := tradinglog.IsStartTradeLevel500Met() &&
@@ -115,6 +120,7 @@ func main() {
 			log.Println("Created limit order for level 382")
 			takeProfitQuantity = "0.003"
 			takeProfitPrice = strLevels[0]
+			orderinfolog.CreateOrdersConfigFileAndWriteData(takeProfitQuantity, takeProfitPrice)
 		}
 
 		if openOrder500 {
@@ -122,6 +128,7 @@ func main() {
 			log.Println("Created limit order for level 500")
 			takeProfitQuantity = "0.004"
 			takeProfitPrice = strLevels[1]
+			orderinfolog.CreateOrdersConfigFileAndWriteData(takeProfitQuantity, takeProfitPrice)
 		}
 
 		if openOrder618 {
@@ -129,6 +136,7 @@ func main() {
 			log.Println("Created limit order for level 618")
 			takeProfitQuantity = "0.005"
 			takeProfitPrice = strLevels[2]
+			orderinfolog.CreateOrdersConfigFileAndWriteData(takeProfitQuantity, takeProfitPrice)
 		}
 
 		if openOrder786 {
@@ -136,6 +144,7 @@ func main() {
 			log.Println("Created limit order for level 786")
 			takeProfitQuantity = "0.006"
 			takeProfitPrice = strLevels[3]
+			orderinfolog.CreateOrdersConfigFileAndWriteData(takeProfitQuantity, takeProfitPrice)
 		}
 
 		openStopLossOrder382 := openOrder382 &&
@@ -167,8 +176,17 @@ func main() {
 		transactions.ProcessStopLossOrder(openStopLossOrder618, "0.005", strLevels[4])
 		transactions.ProcessStopLossOrder(openStopLossOrder786, "0.006", minString)
 
+		log.Println("Take profit condition: ", openTakeProfitOrder)
+
+		takeProfitQuantityFromJson, takeProfitPriceFromJson, err := orderinfolog.ReadOrdersConfig(ordersConfigFile)
+		if err != nil {
+			log.Fatalf("Error reading orders config file: %v", err)
+		}
+		log.Println("Take profit quantity from json: ", takeProfitQuantityFromJson)
+		log.Println("Take profit price from json: ", takeProfitPriceFromJson)
+
 		if openTakeProfitOrder {
-			transactions.CreatTakeProfitOrder(takeProfitQuantity, takeProfitPrice)
+			transactions.CreatTakeProfitOrder(takeProfitQuantityFromJson, takeProfitPriceFromJson)
 		}
 
 		logger.CleanLogCountLines(250)
