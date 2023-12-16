@@ -16,7 +16,7 @@ import (
 
 func main() {
 	var file *os.File
-	for range time.Tick(time.Second * 30) {
+	for range time.Tick(time.Second * 60) {
 		logger := logger.Logger{}
 		err := logger.CreateLogsDir()
 		if err != nil {
