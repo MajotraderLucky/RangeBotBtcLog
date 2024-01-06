@@ -8,3 +8,4 @@ logs/
 tmp.txt
 logs/log.txt
 ordersSaveStopMarket.json
+counters/
