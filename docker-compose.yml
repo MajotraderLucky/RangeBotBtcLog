@@ -9,6 +9,7 @@ services:
     volumes:
     - ./logs:/app/logs
     - ./configurations:/app/configurations
+    - ./counters:/app/counters
     environment:
       - TZ=Europe/Moscow
     networks:
