@@ -184,7 +184,7 @@ func main() {
 			transactions.CreatTakeProfitOrder(takeProfitQuantityFromJson, takeProfitPriceFromJson)
 		}
 
-		logger.CleanLogCountLines(250)
+		logger.CleanLogCountLines(300)
 	}
 	defer file.Close()
 
