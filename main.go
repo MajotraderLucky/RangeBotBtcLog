@@ -19,6 +19,7 @@ import (
 func createCountersDirectory() error {
 	dirPath := "counters"
 	filePath := dirPath + "/cyclecounter.json"
+	isNewFile := false // flag to track if the file was just created
 
 	// Check if the directory exists
 	_, err := os.Stat(dirPath)
@@ -38,14 +39,25 @@ func createCountersDirectory() error {
 
 	// Check if the file exists
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		isNewFile = true // set the flag to true if the file does not exist
 		// Create the "ordersconfig.json" file with read and write permissions
 		file, err := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE, 0664)
 		if err != nil {
 			log.Fatal("Failed to create 'cyclecounter.json' file:", err)
 		}
 		defer file.Close()
+	} else {
+		log.Println("File already exists")
+	}
 
-		// Write 1 as int to the file
+	// Write 1 as int to the file only if the file was just created
+	if isNewFile {
+		file, err := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE, 0664)
+		if err != nil {
+			log.Fatal("Failed to open 'cyclecounter.json' file:", err)
+		}
+		defer file.Close()
+
 		counter := 1
 		err = json.NewEncoder(file).Encode(counter)
 		if err != nil {
